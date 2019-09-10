@@ -11,6 +11,7 @@
     "webpack": "webpack --mode development --watch"
   },
   "dependencies": {
+    "express": "^4.17.1",
     "firebase": "^6.5.0",
     "vue": "^2.5.2",
     "vuefire": "^2.1.2"

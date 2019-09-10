@@ -145,8 +145,34 @@ export default {
         },
         loginSubmit: function() {
             if( this.loginData.email != '' && this.loginData.password != ''){
-                console.log(this.validarEmail(this.loginData.email))
+                if(this.validarEmail(this.loginData.email)){
 
+
+                    var dataLogin = this.loginData;
+
+                    usersRef.orderByKey().on("value", function(snp){
+                                    snp.forEach(function(data){
+                                        if ( data.val().email == dataLogin.email && data.val().password === dataLogin.password) {
+                                            
+                                            M.toast({html:'Has Ingresado'})
+
+                                            this.loginData.email = '';
+                                            this.loginData.password = '';
+
+                                           }else{
+
+                                                M.toast({html:'Cuenta no Encontrada'})
+                                            
+                                        }
+                                    })
+                                })
+
+                }else{
+                    M.toast({html:'Email no Valido'})
+                }
+
+            }else {
+                M.toast({html:'Completa todos los Campos'})
             }
         },
         signupSubmit : function () {
@@ -154,8 +180,33 @@ export default {
                 if(this.validarEmail(this.signupData.email)){
                     if( this.signupData.password.length >= 10 ){
                         if ( this.signupData.password === this.signupData.rePassword ) {
+
+                            var repeatEmail = false;
+                            var dataSignup = this.signupData;
                            
-                            console.log(usersRef.collection('users'))
+                            usersRef.orderByKey().on("value", function(snp){
+                                    snp.forEach(function(data){
+                                        if ( data.val().email == dataSignup.email ) {
+                                            repeatEmail = true;
+                                        }
+                                    })
+                                })
+
+                            if( !repeatEmail ){
+
+                                usersRef.push({
+                                    email: this.signupData.email,
+                                    password: this.signupData.password
+                                });
+
+                                this.signupData.email = '';
+                                this.signupData.password = '';
+                                this.signupData.rePassword = '';
+
+                            } else {
+                                M.toast({html:'Tu Correo ya esta Usado'})
+
+                            }
 
 
                         }else{

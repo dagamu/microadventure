@@ -5,6 +5,7 @@
   "license": "MIT",
   "scripts": {
     "dev": "nodemon src",
+    "start": "node src",
     "wdev": "webpack-dev-server --inline --progress",
     "webpack": "webpack --mode development --watch",
     "prod": "webpack --mode production"

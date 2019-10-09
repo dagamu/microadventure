@@ -42,10 +42,16 @@ export default function Cell(canvas){
 	this.vel = 1;
 	this.dir;
 	this.exp = 0;
+	this.lastFood = '';
+	this.res = 1;
+	this.life = 100
 
 	this.color = {};
 
 	this.update = function(mouseX, mouseY){
+
+		width = canvas.width;
+		height = canvas.height;
 
 		this.dir = new Victor(mouseX - width / 2,mouseY - height / 2);
 		this.dir = this.dir.normalize();

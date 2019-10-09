@@ -8,7 +8,7 @@
     "start": "node src",
     "wdev": "webpack-dev-server --inline --progress",
     "webpack": "webpack --mode development --watch",
-    "prod": "webpack --mode production"
+    "build": "webpack --mode production"
   },
   "dependencies": {
     "axios": "^0.19.0",
